@@ -73,8 +73,8 @@ const plans=[
 const money=n=>'UGX '+Number(n||0).toLocaleString('en-UG');
 const $=id=>document.getElementById(id);
 let user=null, ledger=[], purchased=[], deferredPrompt=null, apiToken=localStorage.getItem("saachii_api_token")||"";
-const API_BASE="https://saachii-api.investmentreal95.workers.dev";
-async function api(path, options={}){const headers={"Content-Type":"application/json",...(options.headers||{})};if(apiToken)headers.Authorization="Bearer "+apiToken;const response=await fetch(API_BASE+path,{...options,headers});const data=await response.json().catch(()=>({error:"Unexpected server response"}));if(!response.ok)throw new Error(data.error||"Request failed ("+response.status+")");return data;}
+const API_BASE="";
+async function api(path, options={}){const headers={"Content-Type":"application/json",...(options.headers||{})};if(apiToken)headers.Authorization="Bearer "+apiToken;const response=await fetch(API_BASE+path,{...options,headers});const raw=await response.text();let data;try{data=JSON.parse(raw)}catch{data={error:raw.slice(0,180)||"Empty response from server"}}if(!response.ok)throw new Error(data.error||"Request failed ("+response.status+")");return data;}
 const storageKey='saachii_demo_user_v1';
 function toast(s){$('toastRoot').innerHTML='<div class="toast">'+escapeHtml(s)+'</div>';setTimeout(()=>$('toastRoot').innerHTML='',2600)}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
