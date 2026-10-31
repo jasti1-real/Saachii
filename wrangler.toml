@@ -6,11 +6,10 @@ workers_dev = true
 [[d1_databases]]
 binding = "DB"
 database_name = "saachii-db"
-database_id = "REPLACE_WITH_YOUR_CLOUDFLARE_D1_DATABASE_ID"
+database_id = "3103c54b-da01-4641-b0b3-87c32da3aa45"
 
 # Before deploying:
-# 1. Create a D1 database named saachii-db in Cloudflare.
-# 2. Replace the database_id above with its actual ID.
-# 3. Run: npx wrangler d1 execute saachii-db --remote --file=./schema.sql
-# 4. Set up origin/CORS allowlisting and rate limiting before production.
-# 5. Add MarzPay secrets only after receiving official API documentation and credentials.
+# 1. Apply schema.sql to this D1 database.
+# 2. Deploy the Worker and test the API.
+# 3. Set up exact allowed origins and rate limiting before production.
+# 4. Add MarzPay secrets only after receiving official API documentation and credentials.
